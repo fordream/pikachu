@@ -30,6 +30,9 @@ public class DrawView extends View {
 	// kich thuoc cua cac the hinh
 	final int CardSizeW = 44;
 	final int CardSizeH = 54;
+	// kich thuoc cua bitmap BG
+	private int width = 550;
+	private int height = 750;
 
 	private void InitSound(Context c) {
 		no_ = MediaPlayer.create(c, R.raw.no);
@@ -151,10 +154,6 @@ public class DrawView extends View {
 		CardSelected = false;// the hinh thu nhat chua duoc chon
 
 	}
-
-	// kich thuoc cua bitmap BG
-	final int width = 550;
-	final int height = 750;
 
 	// thuoc tinh de ve Rectangle
 	private void DrawBG(Canvas canvas) {
@@ -501,30 +500,4 @@ public class DrawView extends View {
 	public void runCountTime() {
 	}
 
-	// chua chay duoc
-	/*
-	 * public boolean CheckDedLive() { for(int j=1;j<GameHight;j++) for(int
-	 * i=1;i<GameWidth;i++) { if(CardMatrix[j][i] !=-1) for(int
-	 * m=j+1;m<=GameHight;m++) for(int n=i+1;i<=GameWidth;n++) {
-	 * if(CardMatrix[j][i]==CardMatrix[m][n]) { int temp=CardMatrix[m][n];
-	 * CardMatrix[m][n]=-1; CardMatrix[j][i]=-1; rCount=Integer.MAX_VALUE;
-	 * tCount=0; //FindRoute(x, y, Direction.None); FindRoute(j, i,
-	 * Direction.None); //FindRouteBFS(x, y);
-	 * CardMatrix[m][n]=CardMatrix[j][i]=temp;
-	 * //t.setText("rCount: "+String.valueOf(rCount)); if(rCount !=
-	 * Integer.MAX_VALUE) return false; } } } return true; }
-	 * 
-	 * //chua chay duoc public void HoanVi() { int temp=-1; for(int
-	 * j=1;j<GameHight;j++) for(int i=1;i<GameWidth;i++) { if(CardMatrix[j][i]
-	 * !=-1) { if(CardMatrix[j-1][i] !=-1) { temp=CardMatrix[j-1][i];
-	 * CardMatrix[j-1][i]=CardMatrix[j][i]; } if(CardMatrix[j+1][i] !=-1) {
-	 * temp=CardMatrix[j+1][i]; CardMatrix[j+1][i]=CardMatrix[j][i]; }
-	 * if(CardMatrix[j][i-1] !=-1) { temp=CardMatrix[j][i-1];
-	 * CardMatrix[j-1][i]=CardMatrix[j][i-1]; } if(CardMatrix[j][i+1] !=-1) {
-	 * temp=CardMatrix[j][i+1]; CardMatrix[j-1][i]=CardMatrix[j][i+1]; } }
-	 * 
-	 * for(int m=j+1;m<=GameHight;m++) for(int n=i+1;i<=GameWidth;n++) {
-	 * if(CardMatrix[j][i] !=-1 & CardMatrix[m][n]==CardMatrix[j][i] & temp!=-1)
-	 * { CardMatrix[m][n]=temp; return; } } } }
-	 */
 }
