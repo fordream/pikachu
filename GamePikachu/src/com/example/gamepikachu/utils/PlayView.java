@@ -39,8 +39,7 @@ public class PlayView extends View {
 
 		// tao va nap 15 hinh vao mang bitmap
 		for (int i = 0; i < PikachuUtils.ImagePath.length; i++) {
-			CardImages[i] = BitmapFactory.decodeResource(getResources(), PikachuUtils.ImagePath[i]);
-			CardImages[i] = CommonAndroid.getScaledBitmap(CardImages[i], dwidth -2 , dwidth-2);
+			CardImages[i] = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), PikachuUtils.ImagePath[i]), dwidth - 2, dwidth - 2);
 		}
 	}
 
