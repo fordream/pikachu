@@ -7,8 +7,24 @@
     android:orientation="vertical" >
 
     <com.example.gamepikachu.utils.PlayView
+        android:id="@+id/playview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </com.example.gamepikachu.utils.PlayView>
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_2dp" >
+
+        <Button
+            android:id="@+id/btn_newgame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:text="new game"
+            android:textSize="@dimen/dimen_3dp" />
+    </LinearLayout>
 
 </RelativeLayout>
