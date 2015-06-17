@@ -1,9 +1,6 @@
 package com.example.gamepikachu.utils;
 
-import android.graphics.Point;
-
 import com.example.gamepikachu.R;
-import com.vnp.core.common.LogUtils;
 
 public class PikachuUtils {
 	public static int columns = 14;
@@ -88,8 +85,10 @@ public class PikachuUtils {
 
 		int p1Y = p1.getPosition().y;
 		int p2Y = p2.getPosition().y;
+		
 		int p1YMin = p1Y, p1YMax = p1Y;
 		int p2YMin = p1Y, p2YMax = p1Y;
+		
 		for (int i = p1Y - 1; i >= 0; i--) {
 			if (pikachus[p1.getPosition().x][i].hasPikachu()) {
 				break;
@@ -120,7 +119,7 @@ public class PikachuUtils {
 
 		for (int i = Math.max(p1YMin, p2YMin); i <= Math.min(p1YMax, p2YMax); i++) {
 			Pikachu nP1 = pikachus[p1.getPosition().x][i];
-			Pikachu nP2 = pikachus[p1.getPosition().x][i];
+			Pikachu nP2 = pikachus[p2.getPosition().x][i];
 			Pikachu[] mLines = findByLine(pikachus, nP1, nP2);
 			if (mLines != null) {
 				lines = new Pikachu[4];
@@ -139,44 +138,42 @@ public class PikachuUtils {
 		if (p1.getPosition().equals(p2.getPosition())) {
 			return lines;
 		}
+
+		TYPETOWPOINT type = TYPETOWPOINT.KHACHANGKHACCOT;
+
 		boolean hasLine = false;
 		if (p1.getPosition().x == p2.getPosition().x) {
-			int start = Math.min(p1.getPosition().y, p2.getPosition().y);
-			int end = Math.max(p1.getPosition().y, p2.getPosition().y);
-			for (int i = start; i <= end; i++) {
-				hasLine = true;
-
-				Point p = pikachus[p1.getPosition().x][i].getPosition();
-
-				if (p.equals(p1.getPosition())) {
-					continue;
-				}
-
-				if (p.equals(p2.getPosition())) {
-					continue;
-				}
-
-				if (pikachus[p1.getPosition().x][i].hasPikachu()) {
-					hasLine = false;
-					break;
-				}
-			}
+			type = TYPETOWPOINT.CUNGCOT;
 		} else if (p1.getPosition().y == p2.getPosition().y) {
+			type = TYPETOWPOINT.CUNGHANG;
+		}
+
+		if (type != TYPETOWPOINT.KHACHANGKHACCOT) {
 			int start = Math.min(p1.getPosition().x, p2.getPosition().x);
 			int end = Math.max(p1.getPosition().x, p2.getPosition().x);
 
+			if (type == TYPETOWPOINT.CUNGCOT) {
+				start = Math.min(p1.getPosition().y, p2.getPosition().y);
+				end = Math.max(p1.getPosition().y, p2.getPosition().y);
+			}
 			for (int i = start; i <= end; i++) {
 				hasLine = true;
-				Point p = pikachus[i][p1.getPosition().y].getPosition();
-				if (p.equals(p1.getPosition())) {
+				Pikachu pi = null;
+				if (type == TYPETOWPOINT.CUNGCOT) {
+					pi = pikachus[p1.getPosition().x][i];
+				} else {
+					pi = pikachus[i][p1.getPosition().y];
+				}
+
+				if (pi.getPosition().equals(p1.getPosition())) {
 					continue;
 				}
 
-				if (p.equals(p2.getPosition())) {
+				if (pi.getPosition().equals(p2.getPosition())) {
 					continue;
 				}
 
-				if (pikachus[i][p1.getPosition().y].hasPikachu()) {
+				if (pi.hasPikachu()) {
 					hasLine = false;
 					break;
 				}
@@ -189,5 +186,9 @@ public class PikachuUtils {
 			lines[1] = p2;
 		}
 		return lines;
+	}
+
+	private enum TYPETOWPOINT {
+		CUNGHANG, CUNGCOT, KHACHANGKHACCOT
 	}
 }
