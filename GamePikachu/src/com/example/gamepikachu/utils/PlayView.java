@@ -25,13 +25,14 @@ public class PlayView extends View {
 	private void init() {
 		int width = getWidth();
 		int height = getHeight();
-		int dwidth = width / (PikachuUtils.columns + 2);
-		if (width / (PikachuUtils.columns + 2) > height / (PikachuUtils.rows + 2)) {
-			dwidth = height / (PikachuUtils.rows + 2);
+		int dwidth = width / (PikachuUtils.columns);
+		if (width / (PikachuUtils.columns) > height / (PikachuUtils.rows)) {
+			dwidth = height / (PikachuUtils.rows);
 		}
 
 		int left = (getWidth() - PikachuUtils.columns * dwidth) / 2;
 		int top = (getHeight() - PikachuUtils.rows * dwidth) / 2;
+
 		for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
 			for (int row = 0; row < PikachuUtils.rows; row++) {
 				pikachu[coloum][row] = new Pikachu();
@@ -74,29 +75,17 @@ public class PlayView extends View {
 		picked2.x = -1;
 		picked1.y = -1;
 		picked2.y = -1;
-		for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
-			for (int row = 0; row < PikachuUtils.rows; row++) {
+		for (int coloum = 1; coloum < PikachuUtils.columns - 1; coloum++) {
+			for (int row = 1; row < PikachuUtils.rows - 1; row++) {
 				pikachu[coloum][row].random(PikachuUtils.ImagePath.length);
 			}
 		}
-
 		invalidate();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// TODO
-				for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
-					for (int row = 0; row < PikachuUtils.rows; row++) {
-						pikachu[coloum][row].random(PikachuUtils.ImagePath.length);
-					}
-				}
-			}
-		}).start();
 		//
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) { 
+	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
 		if (pikachu == null) {
@@ -126,11 +115,15 @@ public class PlayView extends View {
 			}
 		}
 
-		if (line != null) {
+		if (lines != null) {
 			Paint paint = new Paint();
 			paint.setColor(Color.RED);
+			if(lines.length == 2){
+				Pikachu p1 = lines[0];
+				Pikachu pi2 = lines[1];
+				canvas.drawLine(p1.getCenterX(), p1.getCenterY(), pi2.getCenterX(), pi2.getCenterX(), paint);
+			}
 		}
-		// invalidate();
 	}
 
 	@Override
@@ -163,7 +156,7 @@ public class PlayView extends View {
 		return super.onTouchEvent(event);
 	}
 
-	private Point[] line = null;
+	private Pikachu[] lines = null;
 
 	private void check() {
 		new Thread(new Runnable() {
@@ -173,7 +166,7 @@ public class PlayView extends View {
 				findLine();
 				invalidate();
 
-				if (line != null) {
+				if (lines != null) {
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
@@ -183,7 +176,7 @@ public class PlayView extends View {
 					pikachu[picked1.x][picked1.y].eat();
 					pikachu[picked2.x][picked2.y].eat();
 					// clear
-					line = null;
+					lines = null;
 					picked1.x = -1;
 					picked1.y = -1;
 					picked2.x = -1;
@@ -195,12 +188,12 @@ public class PlayView extends View {
 	}
 
 	private void findLine() {
-		line = null;
+		lines = null;
 		Pikachu pikachu1 = pikachu[picked1.x][picked1.y];
 		Pikachu pikachu2 = pikachu[picked2.x][picked2.y];
 
 		if (pikachu1.getTypePokemon().equals(pikachu2.getTypePokemon()) && !CommonAndroid.isBlank(pikachu1.getTypePokemon())) {
-
+			lines = PikachuUtils.findByLines(pikachu, pikachu1, pikachu2);
 		}
 	}
 

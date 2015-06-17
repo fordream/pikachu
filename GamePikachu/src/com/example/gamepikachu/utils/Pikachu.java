@@ -19,6 +19,10 @@ public class Pikachu {
 		typePokemon = "";
 	}
 
+	public boolean hasPikachu() {
+		return !"".equals(typePokemon);
+	}
+
 	public Point getPoint() {
 		return point;
 	}
@@ -66,5 +70,13 @@ public class Pikachu {
 
 	public void random(int length) {
 		typePokemon = new Random().nextInt(length) + "";
+	}
+
+	public float getCenterX() {
+		return point.x + dwidth / 2;
+	}
+
+	public float getCenterY() {
+		return point.y + dwidth / 2;
 	}
 }
