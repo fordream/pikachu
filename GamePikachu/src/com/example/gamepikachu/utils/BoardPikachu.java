@@ -1,6 +1,7 @@
 package com.example.gamepikachu.utils;
 
 import android.content.Context;
+import android.graphics.Canvas;
 
 public class BoardPikachu {
 	private int columns = 14;
@@ -30,4 +31,7 @@ public class BoardPikachu {
 		bitmapManager.onCreate(context, dwidth);
 	}
 
+	public void onDraw(Canvas canvas) {
+
+	}
 }
