@@ -29,4 +29,16 @@ public class Pikachu extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		((com.example.gamepikachu.utils.PlayView) findViewById(R.id.playview)).onCreateBroad();
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		((PikachuApplication) getApplication()).getSoundManager().playBG(true);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		((PikachuApplication) getApplication()).getSoundManager().playBG(false);
+	}
 }

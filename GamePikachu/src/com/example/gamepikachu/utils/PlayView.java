@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.example.gamepikachu.PikachuApplication;
 import com.vnp.core.common.CommonAndroid;
 
 import android.annotation.SuppressLint;
@@ -26,7 +27,6 @@ import android.widget.Toast;
 @SuppressLint("WrongCall")
 public class PlayView extends View {
 
-	private SoundManager soundManager = new SoundManager();
 	private Pikachu[][] pikachu = null;
 	private Bitmap[] CardImages;
 	private GAMESTAUTS gamestauts = GAMESTAUTS.NONE;
@@ -63,7 +63,6 @@ public class PlayView extends View {
 
 	public PlayView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		soundManager.init(getContext());
 		onCreate();
 		// setWillNotDraw(false);
 
@@ -73,7 +72,6 @@ public class PlayView extends View {
 	public PlayView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		onCreate();
-		soundManager.init(getContext());
 		// setWillNotDraw(false);
 		invalidate();
 	}
@@ -194,7 +192,7 @@ public class PlayView extends View {
 							picked1.y = row;
 							// sound click
 							// FIXME
-							soundManager.playClick();
+							((PikachuApplication) getContext().getApplicationContext()).getSoundManager().playClick();
 							invalidate();
 						} else if (picked1.x == coloum && picked1.y == row) {
 							picked1.x = -1;
@@ -202,7 +200,7 @@ public class PlayView extends View {
 
 							// sound no
 							// FIXME
-							soundManager.playNo();
+							((PikachuApplication) getContext().getApplicationContext()).getSoundManager().playNo();
 							invalidate();
 						} else if (picked2.x == -1) {
 							picked2.x = coloum;
@@ -228,11 +226,11 @@ public class PlayView extends View {
 			public void run() {
 				findLine();
 				handler.sendEmptyMessage(0);
-				
+
 				if (lines != null) {
 					// sound un eat
 					// FIXME
-					soundManager.playpair();
+					((PikachuApplication) getContext().getApplicationContext()).getSoundManager().playpair();
 					try {
 						Thread.sleep(200);
 					} catch (InterruptedException e) {
@@ -266,8 +264,8 @@ public class PlayView extends View {
 
 					// sound un eat
 					// FIXME
-					
-					soundManager.playno_move();
+
+					((PikachuApplication) getContext().getApplicationContext()).getSoundManager().playno_move();
 				}
 			}
 		}).start();

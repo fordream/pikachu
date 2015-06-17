@@ -1,14 +1,21 @@
 package com.example.gamepikachu;
 
+import com.example.gamepikachu.utils.SoundManager;
+
 import android.app.Application;
 import android.content.Intent;
-import android.util.Log;
 
 public class PikachuApplication extends Application {
+	private SoundManager soundManager = new SoundManager();
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Log.e("AAAAAAAAAAAAAA", "onCreate PikachuApplication");
+		soundManager.init(this);
 		startService(new Intent(this, PikachuService.class));
+	}
+	
+	public SoundManager getSoundManager() {
+		return soundManager;
 	}
 }

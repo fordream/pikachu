@@ -11,6 +11,7 @@ public class SoundManager {
 	private MediaPlayer pair;
 	private MediaPlayer level;
 	private MediaPlayer no_move;
+	private MediaPlayer bg;
 
 	public SoundManager() {
 	}
@@ -21,6 +22,8 @@ public class SoundManager {
 		pair = MediaPlayer.create(c, R.raw.pair);
 		level = MediaPlayer.create(c, R.raw.level);
 		no_move = MediaPlayer.create(c, R.raw.no_move);
+		bg = MediaPlayer.create(c, R.raw.bgm);
+		bg.setLooping(true);
 	}
 
 	public void playlevel() {
@@ -61,6 +64,14 @@ public class SoundManager {
 				Click.start();
 			};
 		}.start();
+	}
+
+	public void playBG(boolean b) {
+		if (b) {
+			bg.start();
+		} else {
+			bg.pause();
+		}
 	}
 
 }
