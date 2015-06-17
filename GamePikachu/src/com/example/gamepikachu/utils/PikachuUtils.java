@@ -26,42 +26,42 @@ public class PikachuUtils {
 	private static Pikachu[] findByLine(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
 		Pikachu[] lines = null;
 		boolean hasLine = false;
-		if (p1.getPoint().x == p2.getPoint().x) {
-			int start = Math.min(p1.getPoint().y, p2.getPoint().y);
-			int end = Math.max(p1.getPoint().y, p2.getPoint().y);
+		if (p1.getPosition().x == p2.getPosition().x) {
+			int start = Math.min(p1.getPosition().y, p2.getPosition().y);
+			int end = Math.max(p1.getPosition().y, p2.getPosition().y);
 			for (int i = start; i <= end; i++) {
 				hasLine = true;
 
-				Point p = pikachus[p1.getPoint().x][i].getPoint();
-				if (p.equals(p1.getPoint())) {
+				Point p = pikachus[p1.getPosition().x][i].getPosition();
+				if (p.equals(p1.getPosition())) {
 					continue;
 				}
 
-				if (p.equals(p2.getPoint())) {
+				if (p.equals(p2.getPosition())) {
 					continue;
 				}
 
-				if (pikachus[p1.getPoint().x][i].hasPikachu()) {
+				if (pikachus[p1.getPosition().x][i].hasPikachu()) {
 					hasLine = false;
 					break;
 				}
 			}
-		} else if (p1.getPoint().y == p2.getPoint().y) {
-			int start = Math.min(p1.getPoint().x, p2.getPoint().x);
-			int end = Math.max(p1.getPoint().x, p2.getPoint().x);
+		} else if (p1.getPosition().y == p2.getPosition().y) {
+			int start = Math.min(p1.getPosition().x, p2.getPosition().x);
+			int end = Math.max(p1.getPosition().x, p2.getPosition().x);
 
 			for (int i = start; i <= end; i++) {
 				hasLine = true;
 
-				Point p = pikachus[i][p1.getPoint().y].getPoint();
-				if (p.equals(p1.getPoint())) {
+				Point p = pikachus[i][p1.getPosition().y].getPosition();
+				if (p.equals(p1.getPosition())) {
 					continue;
 				}
 
-				if (p.equals(p2.getPoint())) {
+				if (p.equals(p2.getPosition())) {
 					continue;
 				}
-				if (pikachus[i][p1.getPoint().y].hasPikachu()) {
+				if (pikachus[i][p1.getPosition().y].hasPikachu()) {
 					hasLine = false;
 					break;
 				}
@@ -71,7 +71,7 @@ public class PikachuUtils {
 		if (hasLine) {
 			lines = new Pikachu[2];
 			lines[0] = p1;
-			lines[0] = p2;
+			lines[1] = p2;
 		}
 		return lines;
 	}

@@ -34,6 +34,13 @@ public class Pikachu {
 	public void create(int dwidth, int coloum, int row, int left, int top) {
 		this.dwidth = dwidth;
 		point = new Point(coloum * dwidth + left, dwidth * row + top);
+		position = new Point(coloum, row);
+	}
+
+	private Point position = new Point();
+
+	public Point getPosition() {
+		return position;
 	}
 
 	public void onMDraw(Canvas canvas, Bitmap[] bit) {
