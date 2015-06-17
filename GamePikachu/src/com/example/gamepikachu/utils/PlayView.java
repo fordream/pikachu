@@ -118,13 +118,22 @@ public class PlayView extends View {
 		if (lines != null) {
 			Paint paint = new Paint();
 			paint.setColor(Color.RED);
-			
+
 			if (lines.length == 2) {
 				Pikachu p1 = lines[0];
 				Pikachu pi2 = lines[1];
 
 				if (p1 != null && pi2 != null)
 					canvas.drawLine(p1.getCenterX(), p1.getCenterY(), pi2.getCenterX(), pi2.getCenterY(), paint);
+			}
+			if (lines.length == 4) {
+				Pikachu pi1 = lines[0];
+				Pikachu pi2 = lines[1];
+				Pikachu pi3 = lines[2];
+				Pikachu pi4 = lines[3];
+				canvas.drawLine(pi1.getCenterX(), pi1.getCenterY(), pi2.getCenterX(), pi2.getCenterY(), paint);
+				canvas.drawLine(pi3.getCenterX(), pi3.getCenterY(), pi2.getCenterX(), pi2.getCenterY(), paint);
+				canvas.drawLine(pi3.getCenterX(), pi3.getCenterY(), pi4.getCenterX(), pi4.getCenterY(), paint);
 			}
 		}
 	}
@@ -185,16 +194,23 @@ public class PlayView extends View {
 					picked2.x = -1;
 					picked2.y = -1;
 					handler.sendEmptyMessage(0);
+				} else {
+					picked1.x = -1;
+					picked1.y = -1;
+					picked2.x = -1;
+					picked2.y = -1;
+					handler.sendEmptyMessage(0);
 				}
 			}
 		}).start();
 	}
 
-	private Handler handler = new Handler(){
+	private Handler handler = new Handler() {
 		public void dispatchMessage(android.os.Message msg) {
 			invalidate();
 		};
 	};
+
 	private void findLine() {
 		lines = null;
 		Pikachu pikachu1 = pikachu[picked1.x][picked1.y];
