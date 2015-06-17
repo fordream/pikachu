@@ -1,9 +1,13 @@
 package com.example.gamepikachu.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.gamepikachu.R;
 
 public class PikachuUtils {
-	public static int columns = 14;
+	// 14
+	public static int columns = 10;
 	public static int rows = 9;
 	public static int number_pikachu = 30;
 	public static int[] ImagePath = { R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5, R.drawable.image6, R.drawable.image7, R.drawable.image8,
@@ -71,5 +75,42 @@ public class PikachuUtils {
 			}
 		}
 		return lines;
+	}
+
+	public static boolean isEndGame(Pikachu[][] pikachu) {
+
+		for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
+			for (int row = 0; row < PikachuUtils.rows; row++) {
+				if (pikachu[coloum][row].hasPikachu()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static boolean canFindWay(Pikachu[][] pikachu) {
+		List<Pikachu> pikachus = new ArrayList<Pikachu>();
+		for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
+			for (int row = 0; row < PikachuUtils.rows; row++) {
+				pikachus.add(pikachu[coloum][row]);
+			}
+		}
+
+		for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
+			for (int row = 0; row < PikachuUtils.rows; row++) {
+				Pikachu p1 = pikachu[coloum][row];
+				if (p1.hasPikachu()) {
+					for (Pikachu p2 : pikachus) {
+						if (!p2.getPosition().equals(p1.getPosition()) && p2.hasPikachu()) {
+							if (findByLines(pikachu, p1, p2) != null) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -27,6 +27,11 @@ import android.widget.Toast;
 public class PlayView extends View {
 	private Pikachu[][] pikachu = null;
 	private Bitmap[] CardImages;
+	private GAMESTAUTS gamestauts = GAMESTAUTS.NONE;
+
+	public void setGamestauts(GAMESTAUTS gamestauts) {
+		this.gamestauts = gamestauts;
+	}
 
 	private void init() {
 		int width = getWidth();
@@ -77,6 +82,7 @@ public class PlayView extends View {
 	}
 
 	public void onCreateBroad() {
+		setGamestauts(GAMESTAUTS.CREATING);
 		picked1.x = -1;
 		picked2.x = -1;
 		picked1.y = -1;
@@ -90,6 +96,9 @@ public class PlayView extends View {
 		}
 
 		int count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+		if (count % 2 == 1) {
+			count++;
+		}
 		int type = 0;
 		while (pikas.size() > 0) {
 			int index = new Random().nextInt(pikas.size());
@@ -100,11 +109,16 @@ public class PlayView extends View {
 			p.setTypePokemon(type + "");
 			if (count == 0) {
 				count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+				if (count % 2 == 1) {
+					count++;
+				}
 				type++;
 			}
 		}
 
 		invalidate();
+
+		setGamestauts(GAMESTAUTS.RUNING);
 	}
 
 	@Override
@@ -163,9 +177,14 @@ public class PlayView extends View {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if (picked1.x != -1 && picked2.x != -1) {
+		if (!(GAMESTAUTS.RUNING == gamestauts)) {
 			return super.onTouchEvent(event);
 		}
+
+		// if (picked1.x != -1 && picked2.x != -1) {
+		// return super.onTouchEvent(event);
+		// }
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
 				for (int row = 0; row < PikachuUtils.rows; row++) {
@@ -194,6 +213,8 @@ public class PlayView extends View {
 	private Pikachu[] lines = null;
 
 	private void check() {
+
+		setGamestauts(GAMESTAUTS.CHECKING);
 		new Thread(new Runnable() {
 
 			@Override
@@ -216,6 +237,14 @@ public class PlayView extends View {
 					picked1.y = -1;
 					picked2.x = -1;
 					picked2.y = -1;
+
+					if (PikachuUtils.isEndGame(pikachu)) {
+						setGamestauts(GAMESTAUTS.END);
+					} else if (!PikachuUtils.canFindWay(pikachu)) {
+						setGamestauts(GAMESTAUTS.GAMEOVER);
+					} else {
+						setGamestauts(GAMESTAUTS.RUNING);
+					}
 					handler.sendEmptyMessage(0);
 				} else {
 					picked1.x = -1;
@@ -223,6 +252,7 @@ public class PlayView extends View {
 					picked2.x = -1;
 					picked2.y = -1;
 					handler.sendEmptyMessage(0);
+					setGamestauts(GAMESTAUTS.RUNING);
 				}
 			}
 		}).start();
@@ -231,6 +261,10 @@ public class PlayView extends View {
 	private Handler handler = new Handler() {
 		public void dispatchMessage(android.os.Message msg) {
 			invalidate();
+
+			if (gamestauts == GAMESTAUTS.END || gamestauts == GAMESTAUTS.GAMEOVER) {
+				CommonAndroid.showDialog(getContext(), gamestauts == GAMESTAUTS.END ? "end" : "gameover", null);
+			}
 		};
 	};
 
