@@ -29,6 +29,14 @@ public class PikachuUtils {
 		return true;
 	}
 
+	private static int lengthWay(Pikachu... p1) {
+		int length = 0;
+		length = Math.abs(p1[0].getPosition().x - p1[1].getPosition().x) + Math.abs(p1[0].getPosition().y - p1[1].getPosition().y);
+		length = length + Math.abs(p1[2].getPosition().x - p1[1].getPosition().x) + Math.abs(p1[2].getPosition().y - p1[1].getPosition().y);
+		length = length + Math.abs(p1[2].getPosition().x - p1[3].getPosition().x) + Math.abs(p1[2].getPosition().y - p1[3].getPosition().y);
+		return length;
+	}
+
 	public static Pikachu[] findByLines(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
 		Pikachu[] lines = null;
 		for (int i = 0; i < pikachus.length; i++) {
@@ -36,11 +44,13 @@ public class PikachuUtils {
 			Pikachu p02 = pikachus[i][p2.getPosition().y];
 			if ((p1.equals(p01) || !p1.equals(p01) && !p01.hasPikachu()) && (p2.equals(p02) || !p2.equals(p02) && !p02.hasPikachu())) {
 				if (qucikCheckLine(pikachus, p1, p01) && qucikCheckLine(pikachus, p01, p02) && qucikCheckLine(pikachus, p02, p2)) {
-					lines = new Pikachu[4];
-					lines[0] = p1;
-					lines[1] = p01;
-					lines[2] = p02;
-					lines[3] = p2;
+					if (lines == null || (lines != null && lengthWay(lines) >= lengthWay(p1, p01, p02, p2))) {
+						lines = new Pikachu[4];
+						lines[0] = p1;
+						lines[1] = p01;
+						lines[2] = p02;
+						lines[3] = p2;
+					}
 				}
 			}
 		}
@@ -50,11 +60,13 @@ public class PikachuUtils {
 			Pikachu p02 = pikachus[p2.getPosition().x][i];
 			if ((p1.equals(p01) || !p1.equals(p01) && !p01.hasPikachu()) && (p2.equals(p02) || !p2.equals(p02) && !p02.hasPikachu())) {
 				if (qucikCheckLine(pikachus, p1, p01) && qucikCheckLine(pikachus, p01, p02) && qucikCheckLine(pikachus, p02, p2)) {
-					lines = new Pikachu[4];
-					lines[0] = p1;
-					lines[1] = p01;
-					lines[2] = p02;
-					lines[3] = p2;
+					if (lines == null || (lines != null && lengthWay(lines) >= lengthWay(p1, p01, p02, p2))) {
+						lines = new Pikachu[4];
+						lines[0] = p1;
+						lines[1] = p01;
+						lines[2] = p02;
+						lines[3] = p2;
+					}
 				}
 			}
 		}
