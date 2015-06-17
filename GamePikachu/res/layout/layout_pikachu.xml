@@ -9,10 +9,13 @@
     <com.example.gamepikachu.utils.PlayView
         android:id="@+id/playview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/menu" >
+
     </com.example.gamepikachu.utils.PlayView>
 
     <LinearLayout
+        android:id="@+id/menu"
         android:layout_width="@dimen/dimen_30dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
