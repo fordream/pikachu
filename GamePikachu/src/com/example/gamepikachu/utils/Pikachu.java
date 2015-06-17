@@ -27,6 +27,9 @@ public class Pikachu {
 		return point;
 	}
 
+	public void setTypePokemon(String typePokemon) {
+	this.typePokemon = typePokemon;
+}
 	public String getTypePokemon() {
 		return typePokemon;
 	}

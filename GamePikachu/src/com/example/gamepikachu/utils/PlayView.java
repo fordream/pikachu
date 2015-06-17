@@ -1,5 +1,11 @@
 package com.example.gamepikachu.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import com.vnp.core.common.CommonAndroid;
 
 import android.annotation.SuppressLint;
@@ -75,13 +81,30 @@ public class PlayView extends View {
 		picked2.x = -1;
 		picked1.y = -1;
 		picked2.y = -1;
+		List<Pikachu> pikas = new ArrayList<Pikachu>();
+
 		for (int coloum = 1; coloum < PikachuUtils.columns - 1; coloum++) {
 			for (int row = 1; row < PikachuUtils.rows - 1; row++) {
-				pikachu[coloum][row].random(PikachuUtils.ImagePath.length);
+				pikas.add(pikachu[coloum][row]);
 			}
 		}
+
+		int count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+		int type = 0;
+		while (pikas.size() > 0) {
+			int index = new Random().nextInt(pikas.size());
+			Pikachu p = pikas.get(index);
+			pikas.remove(index);
+
+			count--;
+			p.setTypePokemon(type + "");
+			if (count == 0) {
+				count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+				type++;
+			}
+		}
+
 		invalidate();
-		//
 	}
 
 	@Override
