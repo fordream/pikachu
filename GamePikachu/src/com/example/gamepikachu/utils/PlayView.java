@@ -25,6 +25,8 @@ import android.widget.Toast;
 //com.example.gamepikachu.utils.PlayView
 @SuppressLint("WrongCall")
 public class PlayView extends View {
+
+	private SoundManager soundManager = new SoundManager();
 	private Pikachu[][] pikachu = null;
 	private Bitmap[] CardImages;
 	private GAMESTAUTS gamestauts = GAMESTAUTS.NONE;
@@ -61,6 +63,7 @@ public class PlayView extends View {
 
 	public PlayView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		soundManager.init(getContext());
 		onCreate();
 		// setWillNotDraw(false);
 
@@ -70,6 +73,7 @@ public class PlayView extends View {
 	public PlayView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		onCreate();
+		soundManager.init(getContext());
 		// setWillNotDraw(false);
 		invalidate();
 	}
@@ -181,21 +185,24 @@ public class PlayView extends View {
 			return super.onTouchEvent(event);
 		}
 
-		// if (picked1.x != -1 && picked2.x != -1) {
-		// return super.onTouchEvent(event);
-		// }
-
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			for (int coloum = 0; coloum < PikachuUtils.columns; coloum++) {
 				for (int row = 0; row < PikachuUtils.rows; row++) {
-					if (pikachu[coloum][row].isSelected(event.getX(), event.getY()) && !pikachu[coloum][row].getTypePokemon().equals("")) {
+					if (pikachu[coloum][row].isSelected(event.getX(), event.getY()) && pikachu[coloum][row].hasPikachu()) {
 						if (picked1.x == -1) {
 							picked1.x = coloum;
 							picked1.y = row;
+							// sound click
+							// FIXME
+							soundManager.playClick();
 							invalidate();
 						} else if (picked1.x == coloum && picked1.y == row) {
 							picked1.x = -1;
 							picked1.y = -1;
+
+							// sound no
+							// FIXME
+							soundManager.playNo();
 							invalidate();
 						} else if (picked2.x == -1) {
 							picked2.x = coloum;
@@ -221,10 +228,13 @@ public class PlayView extends View {
 			public void run() {
 				findLine();
 				handler.sendEmptyMessage(0);
-
+				
 				if (lines != null) {
+					// sound un eat
+					// FIXME
+					soundManager.playpair();
 					try {
-						Thread.sleep(500);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 					}
 
@@ -253,6 +263,11 @@ public class PlayView extends View {
 					picked2.y = -1;
 					handler.sendEmptyMessage(0);
 					setGamestauts(GAMESTAUTS.RUNING);
+
+					// sound un eat
+					// FIXME
+					
+					soundManager.playno_move();
 				}
 			}
 		}).start();
