@@ -9,25 +9,75 @@ public class PikachuUtils {
 	public static int[] ImagePath = { R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5, R.drawable.image6, R.drawable.image7, R.drawable.image8,
 			R.drawable.image9, R.drawable.image10, R.drawable.image11, R.drawable.image12, R.drawable.image13, R.drawable.image14, R.drawable.image15 };
 
+	public static boolean qucikCheckLine(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
+		boolean checkByY = (p1.getPosition().x == p2.getPosition().x);
+		int start = Math.min(checkByY ? p1.getPosition().y : p1.getPosition().x, checkByY ? p2.getPosition().y : p2.getPosition().x);
+		int end = Math.max(checkByY ? p1.getPosition().y : p1.getPosition().x, checkByY ? p2.getPosition().y : p2.getPosition().x);
+
+		for (int i = start; i < end; i++) {
+
+			Pikachu p = pikachus[checkByY ? p1.getPosition().x : i][checkByY ? i : p1.getPosition().y];
+
+			if (p1.getPosition().equals(p.getPosition())) {
+
+			} else if (p2.getPosition().equals(p.getPosition())) {
+
+			} else if (p.hasPikachu()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static Pikachu[] findByLines(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
 		Pikachu[] lines = null;
-		Pikachu[] _lines = findByLine(pikachus, p1, p2);
-		if (_lines != null) {
-			lines = _lines;
-		} else {
-			Pikachu[] lineNgang = findByLineNgang(pikachus, p1, p2);
-			Pikachu[] lineDoc = findByLineDoc(pikachus, p1, p2);
-
-			if (lineNgang != null) {
-				lines = lineNgang;
-			}
-
-			if (lines == null && lineDoc != null) {
-				lines = lineDoc;
+		for (int i = 0; i < pikachus.length; i++) {
+			Pikachu p01 = pikachus[i][p1.getPosition().y];
+			Pikachu p02 = pikachus[i][p2.getPosition().y];
+			if ((p1.equals(p01) || !p1.equals(p01) && !p01.hasPikachu()) && (p2.equals(p02) || !p2.equals(p02) && !p02.hasPikachu())) {
+				if (qucikCheckLine(pikachus, p1, p01) && qucikCheckLine(pikachus, p01, p02) && qucikCheckLine(pikachus, p02, p2)) {
+					lines = new Pikachu[4];
+					lines[0] = p1;
+					lines[1] = p01;
+					lines[2] = p02;
+					lines[3] = p2;
+				}
 			}
 		}
 
+		for (int i = 0; i < pikachus[0].length; i++) {
+			Pikachu p01 = pikachus[p1.getPosition().x][i];
+			Pikachu p02 = pikachus[p2.getPosition().x][i];
+			if ((p1.equals(p01) || !p1.equals(p01) && !p01.hasPikachu()) && (p2.equals(p02) || !p2.equals(p02) && !p02.hasPikachu())) {
+				if (qucikCheckLine(pikachus, p1, p01) && qucikCheckLine(pikachus, p01, p02) && qucikCheckLine(pikachus, p02, p2)) {
+					lines = new Pikachu[4];
+					lines[0] = p1;
+					lines[1] = p01;
+					lines[2] = p02;
+					lines[3] = p2;
+				}
+			}
+		}
 		return lines;
+
+		// Pikachu[] lines = null;
+		// Pikachu[] _lines = findByLine(pikachus, p1, p2);
+		// if (_lines != null) {
+		// lines = _lines;
+		// } else {
+		// Pikachu[] lineNgang = findByLineNgang(pikachus, p1, p2);
+		// Pikachu[] lineDoc = findByLineDoc(pikachus, p1, p2);
+		//
+		// if (lineNgang != null) {
+		// lines = lineNgang;
+		// }
+		//
+		// if (lines == null && lineDoc != null) {
+		// lines = lineDoc;
+		// }
+		// }
+		//
+		// return lines;
 	}
 
 	private static Pikachu[] findByLineNgang(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
@@ -85,10 +135,10 @@ public class PikachuUtils {
 
 		int p1Y = p1.getPosition().y;
 		int p2Y = p2.getPosition().y;
-		
+
 		int p1YMin = p1Y, p1YMax = p1Y;
 		int p2YMin = p1Y, p2YMax = p1Y;
-		
+
 		for (int i = p1Y - 1; i >= 0; i--) {
 			if (pikachus[p1.getPosition().x][i].hasPikachu()) {
 				break;
