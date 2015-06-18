@@ -74,7 +74,7 @@ public class Pikachu {
 			}
 		}
 
-		canvas.drawBitmap(bitmap, point.x, point.y, null);
+		canvas.drawBitmap(bitmap, point.x + 1, point.y + 1, null);
 
 	}
 

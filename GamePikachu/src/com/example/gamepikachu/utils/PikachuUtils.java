@@ -24,13 +24,13 @@ public class PikachuUtils {
 		,R.drawable.f10//
 		,R.drawable.f11//
 		,R.drawable.f12//
-		,R.drawable.f13//
-		,R.drawable.f14//
-		,R.drawable.f15//
-		,R.drawable.f16//
-		,R.drawable.f17//
-		,R.drawable.f18//
-		,R.drawable.f19//
+		//,R.drawable.f13//
+		//,R.drawable.f14//
+		//,R.drawable.f15//
+		//,R.drawable.f16//
+		//,R.drawable.f17//
+		//,R.drawable.f18//
+		//,R.drawable.f19//
 	};//
 
 	public static boolean qucikCheckLine(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {

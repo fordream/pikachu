@@ -63,8 +63,8 @@ public class PlayView extends View {
 			CardImages[i] = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), PikachuUtils.ImagePath[i]), dwidth - 4, dwidth - 4);
 		}
 
-		bg_1 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_1), dwidth, dwidth);
-		bg_2 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_2), dwidth, dwidth);
+		bg_1 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_3), dwidth - 2, dwidth - 2);
+		bg_2 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_3), dwidth - 2, dwidth - 2);
 	}
 
 	public PlayView(Context context, AttributeSet attrs) {
@@ -296,7 +296,7 @@ public class PlayView extends View {
 			lines = PikachuUtils.findByLines(pikachu, pikachu1, pikachu2);
 		}
 
-		//invalidate();
+		// invalidate();
 	}
 
 	private Point picked1 = new Point(), picked2 = new Point();
