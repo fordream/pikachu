@@ -6,31 +6,33 @@ import java.util.List;
 import com.example.gamepikachu.R;
 
 public class PikachuUtils {
+
+	public static final int times = 2 * 60 * 1000;//
 	// 14
-	public static int columns = 12 ;
+	public static int columns = 14;
 	// 10
-	public static int rows = 8;
+	public static int rows = 10;
 	public static int number_pikachu = 30;
 	public static int[] ImagePath = { //
-		R.drawable.f01//
-		,R.drawable.f02//
-		,R.drawable.f03//
-		,R.drawable.f04//
-		,R.drawable.f05//
-		,R.drawable.f06//
-		,R.drawable.f07//
-		,R.drawable.f08//
-		,R.drawable.f09//
-		,R.drawable.f10//
-		,R.drawable.f11//
-		,R.drawable.f12//
-		//,R.drawable.f13//
-		//,R.drawable.f14//
-		//,R.drawable.f15//
-		//,R.drawable.f16//
-		//,R.drawable.f17//
-		//,R.drawable.f18//
-		//,R.drawable.f19//
+	R.drawable.f01//
+			, R.drawable.f02//
+			, R.drawable.f03//
+			, R.drawable.f04//
+			, R.drawable.f05//
+			, R.drawable.f06//
+			, R.drawable.f07//
+			, R.drawable.f08//
+			, R.drawable.f09//
+			, R.drawable.f10//
+			, R.drawable.f11//
+			, R.drawable.f12 //
+	// ,R.drawable.f13//
+	// ,R.drawable.f14//
+	// ,R.drawable.f15//
+	// ,R.drawable.f16//
+	// ,R.drawable.f17//
+	// ,R.drawable.f18//
+	// ,R.drawable.f19//
 	};//
 
 	public static boolean qucikCheckLine(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {

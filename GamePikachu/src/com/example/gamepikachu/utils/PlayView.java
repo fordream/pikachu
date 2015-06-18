@@ -103,7 +103,7 @@ public class PlayView extends View {
 			}
 		}
 
-		int count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+		int count = (PikachuUtils.columns - 2) * (PikachuUtils.rows - 2) / PikachuUtils.ImagePath.length;
 		if (count % 2 == 1) {
 			count++;
 		}
@@ -116,7 +116,7 @@ public class PlayView extends View {
 			count--;
 			p.setTypePokemon(type + "");
 			if (count == 0) {
-				count = PikachuUtils.columns * PikachuUtils.rows / PikachuUtils.ImagePath.length;
+				count = (PikachuUtils.columns - 2) * (PikachuUtils.rows - 2) / PikachuUtils.ImagePath.length;
 				if (count % 2 == 1) {
 					count++;
 				}
