@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.example.gamepikachu.PikachuApplication;
+import com.example.gamepikachu.R;
 import com.vnp.core.common.CommonAndroid;
 
 import android.annotation.SuppressLint;
@@ -30,6 +31,8 @@ public class PlayView extends View {
 	private Pikachu[][] pikachu = null;
 	private Bitmap[] CardImages;
 	private GAMESTAUTS gamestauts = GAMESTAUTS.NONE;
+
+	Bitmap bg_1, bg_2;
 
 	public void setGamestauts(GAMESTAUTS gamestauts) {
 		this.gamestauts = gamestauts;
@@ -59,6 +62,9 @@ public class PlayView extends View {
 		for (int i = 0; i < PikachuUtils.ImagePath.length; i++) {
 			CardImages[i] = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), PikachuUtils.ImagePath[i]), dwidth - 4, dwidth - 4);
 		}
+
+		bg_1 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_1), dwidth, dwidth);
+		bg_2 = CommonAndroid.getScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_2), dwidth, dwidth);
 	}
 
 	public PlayView(Context context, AttributeSet attrs) {
@@ -140,7 +146,7 @@ public class PlayView extends View {
 			for (int row = 0; row < PikachuUtils.rows; row++) {
 				if (pikachu[coloum][row] != null) {
 					Bitmap bitmap = CardImages[0];
-
+					pikachu[coloum][row].onDrawBG(canvas, bg_1, bg_2);
 					if (coloum == picked1.x && row == picked1.y) {
 						pikachu[coloum][row].onDrawSelected(canvas);
 					}

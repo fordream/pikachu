@@ -11,8 +11,27 @@ public class PikachuUtils {
 	// 10
 	public static int rows = 8;
 	public static int number_pikachu = 30;
-	public static int[] ImagePath = { R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5, R.drawable.image6, R.drawable.image7, R.drawable.image8,
-			R.drawable.image9, R.drawable.image10, R.drawable.image11, R.drawable.image12, R.drawable.image13, R.drawable.image14, R.drawable.image15 };
+	public static int[] ImagePath = { //
+		R.drawable.f01//
+		,R.drawable.f02//
+		,R.drawable.f03//
+		,R.drawable.f04//
+		,R.drawable.f05//
+		,R.drawable.f06//
+		,R.drawable.f07//
+		,R.drawable.f08//
+		,R.drawable.f09//
+		,R.drawable.f10//
+		,R.drawable.f11//
+		,R.drawable.f12//
+		,R.drawable.f13//
+		,R.drawable.f14//
+		,R.drawable.f15//
+		,R.drawable.f16//
+		,R.drawable.f17//
+		,R.drawable.f18//
+		,R.drawable.f19//
+	};//
 
 	public static boolean qucikCheckLine(Pikachu[][] pikachus, Pikachu p1, Pikachu p2) {
 		boolean checkByY = (p1.getPosition().x == p2.getPosition().x);

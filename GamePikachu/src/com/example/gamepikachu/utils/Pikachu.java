@@ -28,8 +28,9 @@ public class Pikachu {
 	}
 
 	public void setTypePokemon(String typePokemon) {
-	this.typePokemon = typePokemon;
-}
+		this.typePokemon = typePokemon;
+	}
+
 	public String getTypePokemon() {
 		return typePokemon;
 	}
@@ -53,6 +54,28 @@ public class Pikachu {
 			int index = Integer.parseInt(typePokemon);
 			canvas.drawBitmap(bit[index], point.x + 2, point.y + 2, null);
 		}
+
+	}
+
+	public void onDrawBG(Canvas canvas, Bitmap b1, Bitmap b2) {
+
+		// if (!CommonAndroid.isBlank(typePokemon)) {
+		if (getPosition().x == 0 || getPosition().y == 0 || getPosition().x == PikachuUtils.columns - 1 || getPosition().y == PikachuUtils.rows - 1) {
+			return;
+		}
+		Bitmap bitmap = b1;
+		if (getPosition().x % 2 == 0) {
+			if (getPosition().y % 2 == 0) {
+				bitmap = b2;
+			}
+		} else {
+			if (getPosition().y % 2 == 1) {
+				bitmap = b2;
+			}
+		}
+
+		canvas.drawBitmap(bitmap, point.x, point.y, null);
+
 	}
 
 	public boolean isSelected(float x, float y) {
