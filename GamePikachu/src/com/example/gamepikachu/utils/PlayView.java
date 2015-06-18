@@ -296,7 +296,7 @@ public class PlayView extends View {
 			lines = PikachuUtils.findByLines(pikachu, pikachu1, pikachu2);
 		}
 
-		invalidate();
+		//invalidate();
 	}
 
 	private Point picked1 = new Point(), picked2 = new Point();
