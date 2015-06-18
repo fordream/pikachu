@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sound_main"
+    android:layout_width="@dimen/dimen_30dp"
+    android:layout_height="@dimen/dimen_30dp"
+    android:background="#123456"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/sound_bg"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:background="@drawable/image8" />
+
+    <ImageView
+        android:id="@+id/sound_click"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/image8" />
+
+    <ImageView
+        android:id="@+id/sound_open"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/image8" />
+
+</RelativeLayout>
